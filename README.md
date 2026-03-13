@@ -73,19 +73,6 @@ Our solution aims to:
 
 ---
 
-## 👥 Team Members
-
-| Name | Role |
-|-----|-----|
-| Mohammad Ayaan | Team Leader / AI Developer |
-| Syed Zeyad Ahmad | Database Architect |
-| Abhishek Sharma | Web Designer |
-| Abdul Samad | Frontend Developer |
-| Agrima Sharma | Backend Developer |
-| Ahab Naseem Ansari | Project Manager |
-
----
-
 ## 📷 Project Preview
 
 AI Chat Interface + Database Assistant UI for interacting with the INGRES system.
@@ -97,5 +84,7 @@ AI Chat Interface + Database Assistant UI for interacting with the INGRES system
 ## ⚙️ Installation
 
 Clone the repository
+
+git clone
 
 
