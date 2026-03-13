@@ -85,6 +85,34 @@ AI Chat Interface + Database Assistant UI for interacting with the INGRES system
 
 Clone the repository
 
-git clone
+git clone https://github.com/Dev-AbdulSamad-IT/INGRES-AI-Assistant.git
+
+
+Navigate to the project folder
+cd SIH 2025
+
+
+Run the project
+open index.html
+
+
+---
+
+## 🏆 Smart India Hackathon 2025
+
+This project is built for **Smart India Hackathon 2025**, focusing on solving real-world problems using AI and intelligent systems.
+
+---
+
+## 📞 Contact
+
+📧 Email: dev.abdulsamad.it@gmail.com  
+📍 Location: Aligarh, Uttar Pradesh, India
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
 
 
