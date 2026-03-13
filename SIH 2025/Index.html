@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Virtual Assistant for INGRES - Smart India Hackathon</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .nav-logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #e0e0e0;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url('Gemini_Generated_Image_48821l48821l4882.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-blend-mode: overlay;
+            /* Optional: add a dark overlay for text readability */
+            position: relative;
+            padding: 120px 0 80px;
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Optional: overlay for better text contrast */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(34, 34, 34, 0.45);
+            z-index: 0;
+        }
+
+        .hero-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .hero-image {
+            flex: 0 0 300px;
+            text-align: center;
+            font-size: 8rem;
+            opacity: 0.8;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .features-list {
+            list-style: none;
+        }
+
+        .features-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-list i {
+            color: #4CAF50;
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            flex: 0 0 300px;
+            text-align: center;
+            font-size: 8rem;
+            color: #667eea;
+        }
+
+        /* Chatbot Section */
+        .chatbot {
+            background: white;
+        }
+
+        .chatbot-container {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .chatbot-interface {
+            flex: 2;
+            background: #f8f9fa;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .chat-header h3 {
+            font-size: 1.3rem;
+        }
+
+        .status-online {
+            background: #4CAF50;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .bot-message .message-avatar {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-message {
+            flex-direction: row-reverse;
+        }
+
+        .user-message .message-avatar {
+            background: #ff6b6b;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .message-content {
+            flex: 1;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .user-message .message-content {
+            background: #667eea;
+            color: white;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 20px;
+            background: white;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .chat-input input:focus {
+            border-color: #667eea;
+        }
+
+        .chatbot-features {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 20px;
+            height: fit-content;
+        }
+
+        .chatbot-features h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-item i {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .feature-item span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Team Section */
+        .team {
+            background: #f8f9fa;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .team-member h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .member-role {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .member-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .member-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .member-skills span {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: white;
+        }
+
+        .contact-content {
+            display: flex;
+            gap: 60px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            color: #667eea;
+            font-size: 1.5rem;
+            width: 30px;
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #667eea;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            color: #ecf0f1;
+        }
+
+        .footer-section p {
+            line-height: 1.6;
+        }
+
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ecf0f1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            background: #34495e;
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #667eea;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .about-content,
+            .chatbot-container,
+            .contact-content {
+                flex-direction: column;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .chat-messages {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-robot"></i>
+                <span>INGRES AI Assistant</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#chatbot" class="nav-link">AI Assistant</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#team" class="nav-link">Team</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">AI-Powered Virtual Assistant for INGRES</h1>
+                <p class="hero-subtitle">Revolutionizing data management with intelligent automation and natural language processing</p>
+                <div class="hero-buttons">
+                    <a href="#chatbot" class="btn btn-primary">Try AI Assistant</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <!-- <div class="hero-image">
+                <img src=" Gemini_Generated_Image_bw4644bw4644bw46-removebg-preview.png" alt="Hero Cylinder Image" style="width: 250px; height: 250px; object-fit: cover; border-radius: 30px;" />
+            </div> -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About INGRES AI Assistant</h2>
+                <p>Empowering users with intelligent database management solutions</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Mission</h3>
+                    <p>The AI-powered Virtual Assistant for INGRES is designed to simplify complex database operations through natural language interactions. Our solution leverages advanced machine learning algorithms to understand user queries and provide intelligent responses for database management tasks.</p>
+
+                    <h3>Key Features</h3>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Natural Language Query Processing</li>
+                        <li><i class="fas fa-check"></i> Intelligent Database Operations</li>
+                        <li><i class="fas fa-check"></i> Real-time Data Analysis</li>
+                        <li><i class="fas fa-check"></i> Automated Report Generation</li>
+                        <li><i class="fas fa-check"></i> Multi-language Support</li>
+                        <li><i class="fas fa-check"></i> Secure Data Handling</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <i class="fas fa-brain"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chatbot Section -->
+    <section id="chatbot" class="chatbot">
+        <div class="container">
+            <div class="section-header">
+                <h2>AI Virtual Assistant</h2>
+                <p>Experience the power of intelligent database assistance</p>
+            </div>
+            <div class="chatbot-container">
+                <div class="chatbot-interface">
+                    <div class="chat-header">
+                        <i class="fas fa-robot"></i>
+                        <h3>INGRES AI Assistant</h3>
+                        <span class="status-online">Online</span>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot-message">
+                            <div class="message-avatar">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="message-content">
+                                <p>Hello! I'm your AI-powered INGRES assistant. I can help you with database operations, queries, and data management tasks. How can I assist you today?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="userInput" placeholder="Type your message here...">
+                        <button id="sendButton" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="chatbot-features">
+                    <h3>Capabilities</h3>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-search"></i>
+                            <span>Query Processing</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Data Analysis</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Report Generation</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Security Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Team</h2>
+                <p>Meet the innovators behind the AI-powered INGRES Assistant</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <img src=" 77BAFE4D-B303-4D3A-9A4F-FF12289196E5.jpg" alt="Team Member 1" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;" />
+                    </div>
+                    <h3> MOHAMMAD AYAAN</h3>
+                    <p class="member-role">Team Leader / AI dev</p>
+                    <p class="member-description">Specializes in natural language processing and machine learning algorithms for intelligent database interactions.</p>
+                    <div class="member-skills">
+                        <span>Python</span>
+                        <span>TensorFlow</span>
+                        <span>NLP</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <img src="  PHOTO-2025-09-22-22-44-06.jpg" alt="Team Member 2" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;" />
+                    </div>
+                    <h3>  SYED ZEYAD AHMAD </h3>
+                    <p class="member-role">Database Architect</p>
+                    <p class="member-description">Expert in database design and optimization, ensuring seamless integration with INGRES systems.</p>
+                    <div class="member-skills">
+                        <span>SQL</span>
+                        <span>Database Design</span>
+                        <span>INGRES</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <img src=" IMG20250924113541.jpg" alt="Team Member 3" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;" />
+                    </div>
+                    <h3>ABHISHEK SHARMA</h3>
+                    <p class="member-role"> Web Designer</p>
+                    <p class="member-description">A Web designer creates visually appealing and User-friendly Website Layouts using design tools</p>
+                    <div class="member-skills">
+                        <span>Figma</span>
+                        <span>Canva</span>
+                        <span>Photoshop</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <img src="IMG_20250917_140910.jpg" alt="Team Member 3" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;" />
+                    </div>
+                    <h3>ABDUL SAMAD</h3>
+                    <p class="member-role">Frontend Developer</p>
+                    <p class="member-description">Creates intuitive user interfaces and ensures smooth user experience for the AI assistant platform.</p>
+                    <div class="member-skills">
+                        <span>HTML/CSS</span>
+                        <span>JavaScript</span>
+                        <span>UI/UX</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <img src=" IMG_20250922_233411.jpg" alt="Team Member 4" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;" />
+                    </div>
+                    <h3>AGRIMA SHARMA</h3>
+                    <p class="member-role">Backend Developer</p>
+                    <p class="member-description">Develops robust server-side applications and APIs for seamless AI integration and data processing.</p>
+                    <div class="member-skills">
+                        <span>Python</span>
+                        <span>Flask</span>
+                        <span>REST APIs</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <img src=" PHOTO-2025-09-22-23-22-22.jpg " alt="Team Member 5" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;" />
+                    </div>
+                    <h3>AHAB NASEEM ANSARI</h3>
+                    <p class="member-role">Project Manager</p>
+                    <p class="member-description">Coordinates team efforts and ensures successful project delivery for the Smart India Hackathon.</p>
+                    <div class="member-skills">
+                        <span>Project Management</span>
+                        <span>Agile</span>
+                        <span>Leadership</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>asamad9280@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 72538 40392 </span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Aligarh , Uttar Pradesh</span>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>INGRES AI Assistant</h4>
+                    <p>Revolutionizing database management with AI-powered solutions for Smart India Hackathon 2025.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#chatbot">AI Assistant</a>
+                    <a href="#team">Team</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 INGRES AI Assistant - Smart India Hackathon. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="RpphWhuWvWCVFlKWToMgy";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+</body>
+</html>
